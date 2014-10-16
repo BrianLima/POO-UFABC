@@ -6,6 +6,7 @@
 
 package PackLista1;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /** 
@@ -20,42 +21,73 @@ import java.util.Random;
 * d. exiba a frequência dos 
 * elementos da matriz. 
 **/ 
+
 public class Exercicio_8 {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         int[][] vector = new int[4][3];
-        int[] averages = new int[7];
+        float[] averages = new float[7];
         Random rand = new Random();
-        
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
                 vector[i][j] = rand.nextInt();
             }
         }
-        
+
         for (int i = 0; i < 4; i++) {
-            
+            averages[i] = average(vector[i]);
+
             System.out.println("A média da " + (i + 1) + "ª linha é "
-                    + average(vector[i]));
+                    + averages[i]);
         }
         for (int i = 0; i < 3; i++) {
             int[] column = new int[3];
             column[0] = vector[i][0];
             column[1] = vector[i][1];
             column[2] = vector[i][2];
+            averages[i + 4] = average(column);
 
-            System.out.println("A média da " + (i + 1) + "ª coluna é " + average(column));
+            System.out.println("A média da " + (i + 1) + "ª coluna é "
+                    + averages[i + 4]);
+        }
+
+        Arrays.sort(averages);
+
+        System.out.println("A menor média foi:" + averages[0]);
+        System.out.println("A maior média foi:" + averages[6]);
+
+        float[][] numbers = new float[12][2];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 12; k++) {
+                    if (numbers[k][0] != vector[i][j] && numbers[k][0] == 0) {
+                        numbers[k][0] = vector[i][j];
+                        numbers[k][1]++;
+                        break;
+                    } else if (numbers[k][0] == vector[i][j] && numbers[k][0] != 0) {
+                        numbers[k][1]++;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < 12; i++) {
+            if (numbers[i][1] != 0) {
+                System.out.println("O numero " + numbers[i][0] + " apareceu " + numbers[i][1] + " vezes");
+            }
         }
     }
-    
-    static float average(int[] values){
-        int  result= 0;
-        
+
+    static float average(int[] values) {
+        int result = 0;
+
         for (int i = 0; i < values.length; i++) {
             result += values[i];
         }
-        
-        result = result/values.length;
-        
+
+        result = result / values.length;
+
         return result;
     }
 }
