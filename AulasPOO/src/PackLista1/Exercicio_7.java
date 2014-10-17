@@ -35,8 +35,46 @@ public class Exercicio_7 {
         System.out.println("Digite o inicio do cpf:");
         int cpf = scan.nextInt();
         
-        /*if (cpf > 999999999) {
+        int cpfTemp = cpf;
+        int d1 = 0, d2 = 0;
+
+        for (int i = 9; i >= 1; i--) {
+            int digit = cpf % 10;
+            System.out.println(digit);
+
+            d1 += digit * i;
+
+            cpfTemp -= digit;
+            cpfTemp /= 10;
+        }
         
-        }*/
+        d1 %= 11;
+        if (d1 == 10) {
+            d1 = 0;
+        }
+
+        cpfTemp = cpf;
+
+        for (int i = 9; i >= 0; i--) {
+            if (i == 9) {
+                d2 += d1 * i;
+            } else {
+                int digit = cpf % 10;
+                System.out.println(digit);
+
+                d2 += digit * i;
+
+                cpfTemp -= digit;
+                cpfTemp /= 10;
+            }
+        }
+        
+        d2 %=11;
+        if (d2 == 10) {
+            d2 = 0;
+        }
+        
+        System.out.println(d1);
+        System.out.println(d2);
     }
 }
